@@ -1,3 +1,8 @@
+//Constants and variables
+const display = document.querySelector('.display');
+const numberButtons = document.querySelectorAll('.number')
+let number = '';
+
 //Math Functions
 function add(a,b){
     return a + b;
@@ -27,3 +32,12 @@ function operate(a, b, operator){
             break;
     }
 }
+function updateDisplay(currentNumber){
+    display.textContent = currentNumber;
+}
+numberButtons.forEach(button => {
+    button.addEventListener('click', () =>{
+        number += button.value
+        updateDisplay(number);
+    });    
+});

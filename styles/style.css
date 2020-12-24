@@ -14,13 +14,17 @@
 }
 div.button{
     height:40px;
+    border-radius: 20%;
 }
-button.button{
+button{
+    border-radius: inherit;
     height: 100%;
     width: 100%;
 }
 .display{
-    width: 90%;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: end;
+    width: 14rem;
     background-color: rgb(185, 182, 182);
     margin: auto;
     padding: 10px;
