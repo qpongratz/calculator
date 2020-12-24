@@ -4,7 +4,7 @@
     grid-template: repeat(5, 1fr) / repeat(4, 1fr);
 }
 div.button{
-    height:400px;
+    height:40px;
 }
 button.button{
     height: 100%;
