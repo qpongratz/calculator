@@ -1,7 +1,16 @@
+.calculator{
+    width: fit-content;
+    height: fit-content;
+    background-color: rgb(162, 162, 255);
+    padding: 1em;
+}
 .calcBottom{
+    margin: auto;
+    margin-top: 1em;
     display: grid;
-    width: 400px;
+    width: 90%;
     grid-template: repeat(5, 1fr) / repeat(4, 1fr);
+    grid-gap: 10px;
 }
 div.button{
     height:40px;
@@ -9,5 +18,11 @@ div.button{
 button.button{
     height: 100%;
     width: 100%;
+}
+.display{
+    width: 90%;
+    background-color: rgb(185, 182, 182);
+    margin: auto;
+    padding: 10px;
 }
 
