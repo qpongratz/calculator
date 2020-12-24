@@ -1,0 +1,13 @@
+.calcBottom{
+    display: grid;
+    width: 400px;
+    grid-template: repeat(5, 1fr) / repeat(4, 1fr);
+}
+div.button{
+    height:400px;
+}
+button.button{
+    height: 100%;
+    width: 100%;
+}
+
