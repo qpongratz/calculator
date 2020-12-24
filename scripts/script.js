@@ -35,6 +35,7 @@ function operate(a, b, operator){
 function updateDisplay(currentNumber){
     display.textContent = currentNumber;
 }
+//Gives the number buttons their ability to display digits
 numberButtons.forEach(button => {
     button.addEventListener('click', () =>{
         number += button.value
