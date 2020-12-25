@@ -2,7 +2,7 @@
 const display = document.querySelector('.display');
 const numberButtons = document.querySelectorAll('.number')
 const operatorButtons = document.querySelectorAll('.operator');
-const equalsButton = document.getElementById('equals');
+const equalsButton = document.getElementById('=');
 let currentNumber = '';
 let originalNumber = '';
 let storedOperator = '';
@@ -70,7 +70,32 @@ operatorButtons.forEach(button =>{
 })
 //The equals button ladies, gentlemen, and non-binary folks.
 equalsButton.addEventListener('click', () =>{
+    if(currentNumber === ''){
+        if(originalNumber === ''){
+            originalNumber = currentNumber;
+        };
+        updateDisplay(originalNumber);
+        return;
+    };
+    if(originalNumber === ''){
+        originalNumber = currentNumber;
+        updateDisplay(originalNumber);
+        currentNumber = '';
+        return;
+    };
     originalNumber = operate(+originalNumber, +currentNumber, storedOperator);
     updateDisplay(originalNumber);
     currentNumber = '';
+});
+
+//keyboard support
+window.addEventListener('keydown', function(e) {
+    button = document.getElementById(e.key);
+    if(button === null){
+        button = document.querySelector(`[data-alt='${e.key}'`)
+    }
+    if(button === null){
+        return;
+    }
+    button.click();
 })
