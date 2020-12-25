@@ -56,6 +56,8 @@ operatorButtons.forEach(button =>{
             originalNumber = currentNumber;
             currentNumber = '';
             storedOperator = button.value;
+        }else if(currentNumber === ''){
+            storedOperator = button.value;
         }else{
             originalNumber = operate(+originalNumber, +currentNumber, storedOperator);
             updateDisplay(originalNumber);
