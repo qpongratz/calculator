@@ -2,6 +2,7 @@
 const display = document.querySelector('.display');
 const numberButtons = document.querySelectorAll('.number')
 const operatorButtons = document.querySelectorAll('.operator');
+const equalsButton = document.getElementById('equals');
 let currentNumber = '';
 let originalNumber = '';
 let storedOperator = '';
@@ -45,6 +46,7 @@ function updateDisplay(currentNumber){
 //Gives the number buttons their ability to display digits
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
+        //Add a check for doing decimal multiple times
         currentNumber += button.value
         updateDisplay(currentNumber);
     });    
@@ -65,4 +67,10 @@ operatorButtons.forEach(button =>{
             storedOperator = button.value;
         }
     })
+})
+//The equals button ladies, gentlemen, and non-binary folks.
+equalsButton.addEventListener('click', () =>{
+    originalNumber = operate(+originalNumber, +currentNumber, storedOperator);
+    updateDisplay(originalNumber);
+    currentNumber = '';
 })
