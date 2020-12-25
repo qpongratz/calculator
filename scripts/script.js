@@ -1,7 +1,10 @@
 //Constants and variables
 const display = document.querySelector('.display');
 const numberButtons = document.querySelectorAll('.number')
-let number = '';
+const operatorButtons = document.querySelectorAll('.operator');
+let currentNumber = '';
+let originalNumber = '';
+let storedOperator = '';
 
 //Math Functions
 function add(a,b){
@@ -37,8 +40,25 @@ function updateDisplay(currentNumber){
 }
 //Gives the number buttons their ability to display digits
 numberButtons.forEach(button => {
-    button.addEventListener('click', () =>{
-        number += button.value
-        updateDisplay(number);
+    button.addEventListener('click', () => {
+        currentNumber += button.value
+        updateDisplay(currentNumber);
     });    
 });
+//Gives the operator their ability to juggle and calculate numbers
+operatorButtons.forEach(button =>{
+    button.addEventListener('click', () => {
+        if(originalNumber === ''){
+            originalNumber = currentNumber;
+            currentNumber = '';
+            storedOperator = button.value;
+        }else{
+            originalNumber = operate(+originalNumber, +currentNumber, storedOperator);
+            updateDisplay(originalNumber);
+            currentNumber = '';
+            storedOperator = button.value;
+        }
+    })
+})
+
+console.log(+'')
