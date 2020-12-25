@@ -31,6 +31,10 @@ function operate(a, b, operator){
             return multiply(a,b);
             break;
         case '/':
+            if(b === 0){
+                alert('I cannot do that.')
+                return 0;
+            }
             return divide(a,b);
             break;
     }
@@ -60,5 +64,3 @@ operatorButtons.forEach(button =>{
         }
     })
 })
-
-console.log(+'')
