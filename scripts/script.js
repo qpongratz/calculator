@@ -54,17 +54,19 @@ function operate(a, b, operator){
     }
 }
 function updateDisplay(currentNumber){
-    display.textContent = currentNumber;
+    display.textContent = +currentNumber;
 }
 //Give clear and back their events.
-allClearButton.addEventListener('click', () =>{
-    currentNumber = '0';
-    originalNumber = '';
-    storedOperator = '';
-    equalAgain = false;
-    updateDisplay(currentNumber);
-    test('allClear');
-})
+function clearAll() {
+        currentNumber = '0';
+        originalNumber = '';
+        storedOperator = '';
+        equalAgain = false;
+        updateDisplay(currentNumber);
+        test('allClear');
+};
+allClearButton.addEventListener('click', clearAll);
+
 clearEntryButton.addEventListener('click', () =>{
     currentNumber = '0';
     updateDisplay(currentNumber);
@@ -76,6 +78,9 @@ clearEntryButton.addEventListener('click', () =>{
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         //Add a check for doing decimal multiple times
+        if(equalAgain){
+            clearAll();
+        }
         equalAgain = false;
         currentNumber += button.value
         updateDisplay(currentNumber);
@@ -136,11 +141,15 @@ equalsButton.addEventListener('click', () =>{
 //keyboard support
 window.addEventListener('keydown', function(e) {
     let button = document.getElementById(e.key);
+    //looks for Enter key to press the equal button once.
     if(button === null){
         button = document.querySelector(`[data-alt='${e.key}'`)
+        button.focus();
+        return;
     }
     if(button === null){
         return;
     }
+    button.focus();
     button.click();
 })
