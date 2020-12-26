@@ -3,9 +3,12 @@ const display = document.querySelector('.display');
 const numberButtons = document.querySelectorAll('.number')
 const operatorButtons = document.querySelectorAll('.operator');
 const equalsButton = document.getElementById('=');
+const clearButton = document.getElementById('clear');
+const backButton = document.getElementById('backspace');
 let currentNumber = '';
 let originalNumber = '';
 let storedOperator = '';
+let equalAgain = false;
 
 //Math Functions
 function add(a,b){
@@ -43,10 +46,14 @@ function operate(a, b, operator){
 function updateDisplay(currentNumber){
     display.textContent = currentNumber;
 }
+//Give clear and back their events.
+
+
 //Gives the number buttons their ability to display digits
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         //Add a check for doing decimal multiple times
+        equalsAgain = false;
         currentNumber += button.value
         updateDisplay(currentNumber);
     });    
@@ -54,6 +61,7 @@ numberButtons.forEach(button => {
 //Gives the operator their ability to juggle and calculate numbers
 operatorButtons.forEach(button =>{
     button.addEventListener('click', () => {
+        equalsAgain = false;
         if(originalNumber === ''){
             originalNumber = currentNumber;
             currentNumber = '';
@@ -70,23 +78,33 @@ operatorButtons.forEach(button =>{
 })
 //The equals button ladies, gentlemen, and non-binary folks.
 equalsButton.addEventListener('click', () =>{
+    if(equalAgain){
+        originalNumber = operate(+originalNumber, +lastNumber, lastOperator);
+        updateDisplay(originalNumber);        
+    }    
     if(currentNumber === ''){
         if(originalNumber === ''){
             originalNumber = currentNumber;
         };
         updateDisplay(originalNumber);
+        storedOperator = '';
         return;
     };
     if(originalNumber === ''){
         originalNumber = currentNumber;
         updateDisplay(originalNumber);
         currentNumber = '';
+        storedOperator = '';
         return;
     };
     originalNumber = operate(+originalNumber, +currentNumber, storedOperator);
     updateDisplay(originalNumber);
+    lastNumber = currentNumber;
+    lastOperator = storedOperator;
+    equalAgain = true;
     currentNumber = '';
 });
+
 
 //keyboard support
 window.addEventListener('keydown', function(e) {
