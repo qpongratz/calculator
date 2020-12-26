@@ -16,6 +16,7 @@ function test(identity){
     console.log({currentNumber});
     console.log({originalNumber});
     console.log({storedOperator});
+    console.log({equalAgain});
     console.log(identity);
 }
 
@@ -64,12 +65,18 @@ allClearButton.addEventListener('click', () =>{
     updateDisplay(currentNumber);
     test('allClear');
 })
+clearEntryButton.addEventListener('click', () =>{
+    currentNumber = '0';
+    updateDisplay(currentNumber);
+    equalAgain = false;
+    test('clearEntry')
+})
 
 //Gives the number buttons their ability to display digits
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         //Add a check for doing decimal multiple times
-        equalsAgain = false;
+        equalAgain = false;
         currentNumber += button.value
         updateDisplay(currentNumber);
         test('numberButton')
@@ -79,7 +86,7 @@ numberButtons.forEach(button => {
 operatorButtons.forEach(button =>{
     button.addEventListener('click', () => {
         test('operatorButton')
-        equalsAgain = false;
+        equalAgain = false;
         if(originalNumber === ''){
             originalNumber = currentNumber;
             currentNumber = '';
@@ -99,7 +106,8 @@ equalsButton.addEventListener('click', () =>{
     test('equal')
     if(equalAgain){
         originalNumber = operate(+originalNumber, +lastNumber, lastOperator);
-        updateDisplay(originalNumber);        
+        updateDisplay(originalNumber);  
+        return;      
     }    
     if(currentNumber === ''){
         if(originalNumber === ''){
