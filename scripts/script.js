@@ -73,6 +73,11 @@ clearEntryButton.addEventListener('click', () =>{
     equalAgain = false;
     test('clearEntry')
 })
+backButton.addEventListener('click', ()=>{
+    console.log(currentNumber);
+    currentNumber = currentNumber.slice(0, (currentNumber.length - 1))
+    updateDisplay(currentNumber);
+});
 
 //Gives the number buttons their ability to display digits
 numberButtons.forEach(button => {
