@@ -147,9 +147,6 @@ window.addEventListener('keydown', function(e) {
         button.focus();
         return;
     }
-    if(button === null){
-        return;
-    }
     button.focus();
     button.click();
 })
