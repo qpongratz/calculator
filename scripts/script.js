@@ -3,12 +3,21 @@ const display = document.querySelector('.display');
 const numberButtons = document.querySelectorAll('.number')
 const operatorButtons = document.querySelectorAll('.operator');
 const equalsButton = document.getElementById('=');
-const clearButton = document.getElementById('clear');
+const allClearButton = document.getElementById('allClear');
+const clearEntryButton = document.getElementById('clearEntry');
 const backButton = document.getElementById('backspace');
 let currentNumber = '';
 let originalNumber = '';
 let storedOperator = '';
 let equalAgain = false;
+
+//testing function
+function test(identity){
+    console.log({currentNumber});
+    console.log({originalNumber});
+    console.log({storedOperator});
+    console.log(identity);
+}
 
 //Math Functions
 function add(a,b){
@@ -47,7 +56,14 @@ function updateDisplay(currentNumber){
     display.textContent = currentNumber;
 }
 //Give clear and back their events.
-
+allClearButton.addEventListener('click', () =>{
+    currentNumber = '0';
+    originalNumber = '';
+    storedOperator = '';
+    equalAgain = false;
+    updateDisplay(currentNumber);
+    test('allClear');
+})
 
 //Gives the number buttons their ability to display digits
 numberButtons.forEach(button => {
@@ -56,11 +72,13 @@ numberButtons.forEach(button => {
         equalsAgain = false;
         currentNumber += button.value
         updateDisplay(currentNumber);
+        test('numberButton')
     });    
 });
 //Gives the operator their ability to juggle and calculate numbers
 operatorButtons.forEach(button =>{
     button.addEventListener('click', () => {
+        test('operatorButton')
         equalsAgain = false;
         if(originalNumber === ''){
             originalNumber = currentNumber;
@@ -78,6 +96,7 @@ operatorButtons.forEach(button =>{
 })
 //The equals button ladies, gentlemen, and non-binary folks.
 equalsButton.addEventListener('click', () =>{
+    test('equal')
     if(equalAgain){
         originalNumber = operate(+originalNumber, +lastNumber, lastOperator);
         updateDisplay(originalNumber);        
@@ -108,7 +127,7 @@ equalsButton.addEventListener('click', () =>{
 
 //keyboard support
 window.addEventListener('keydown', function(e) {
-    button = document.getElementById(e.key);
+    let button = document.getElementById(e.key);
     if(button === null){
         button = document.querySelector(`[data-alt='${e.key}'`)
     }
