@@ -5,7 +5,7 @@ const operatorButtons = document.querySelectorAll('.operator');
 const equalsButton = document.getElementById('=');
 const allClearButton = document.getElementById('allClear');
 const clearEntryButton = document.getElementById('clearEntry');
-const backButton = document.getElementById('backspace');
+const backButton = document.getElementById('Backspace');
 let currentNumber = '';
 let originalNumber = '';
 let storedOperator = '';
@@ -68,24 +68,32 @@ function clearAll() {
 allClearButton.addEventListener('click', clearAll);
 
 clearEntryButton.addEventListener('click', () =>{
+    //add check if this was pressed twice and clear all if so?
     currentNumber = '0';
     updateDisplay(currentNumber);
     equalAgain = false;
     test('clearEntry')
 })
+
 backButton.addEventListener('click', ()=>{
     console.log(currentNumber);
+    //clears all if you just did a calculation with =
+    if(equalAgain){
+        clearAll();
+    }
     currentNumber = currentNumber.slice(0, (currentNumber.length - 1))
+    equalAgain = false;
     updateDisplay(currentNumber);
 });
 
 //Gives the number buttons their ability to display digits
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
-        //Add a check for doing decimal multiple times
+        //starts fresh if you do a number after completing a calculation with =
         if(equalAgain){
             clearAll();
         }
+        //checks if you try to do multiple decimal points
         if(button.value === '.' && currentNumber.indexOf('.') > -1){
             console.log(button.value);
             console.log(currentNumber.indexOf('.'))
@@ -136,7 +144,7 @@ equalsButton.addEventListener('click', () =>{
         originalNumber = currentNumber;
         updateDisplay(originalNumber);
         currentNumber = '';
-        storedOperator = '';
+        //storedOperator = '';
         return;
     };
     originalNumber = operate(+originalNumber, +currentNumber, storedOperator);
