@@ -86,6 +86,11 @@ numberButtons.forEach(button => {
         if(equalAgain){
             clearAll();
         }
+        if(button.value === '.' && currentNumber.indexOf('.') > -1){
+            console.log(button.value);
+            console.log(currentNumber.indexOf('.'))
+            return;
+        }
         equalAgain = false;
         currentNumber += button.value
         updateDisplay(currentNumber);
