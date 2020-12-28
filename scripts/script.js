@@ -17,16 +17,16 @@ let lastNumber = '';
 let equalAgain = false;
 updateDisplay(currentNumber)
 
-//testing function
-function test(identity){
-    console.log({currentNumber});
-    console.log({originalNumber});
-    console.log({storedOperator});
-    console.log({equalAgain});
-    console.log({lastNumber});
-    console.log({lastOperator});
-    console.log(identity);
-}
+// //testing function
+// function test(identity){
+//     console.log({currentNumber});
+//     console.log({originalNumber});
+//     console.log({storedOperator});
+//     console.log({equalAgain});
+//     console.log({lastNumber});
+//     console.log({lastOperator});
+//     console.log(identity);
+// }
 
 //Math Functions
 function add(a,b){
@@ -62,14 +62,10 @@ function operate(a, b, operator){
             break;
     }
 }
-let number = 9.147049018269502e+103+''
-console.log(number.length)
 function updateDisplay(currentNumber){
     //Some messy code to git rid of leading zeros but also displaying numbers after a decimal correctly
     currentNumber = currentNumber +''
     let length = currentNumber.length;
-    console.log(length)
-    console.log(typeof(length))
     if(length > 14){
         currentNumber = (+currentNumber).toExponential(7);
     }
@@ -94,7 +90,6 @@ function clearAll() {
         storedOperator = '';
         equalAgain = false;
         updateDisplay(currentNumber);
-        test('allClear');
 };
 allClearButton.addEventListener('click', clearAll);
 
@@ -103,11 +98,9 @@ clearEntryButton.addEventListener('click', () =>{
     currentNumber = '0';
     updateDisplay(currentNumber);
     equalAgain = false;
-    test('clearEntry')
 })
 
 backButton.addEventListener('click', ()=>{
-    console.log(currentNumber);
     //clears all if you just did a calculation with =
     if(equalAgain){
         clearAll();
@@ -126,8 +119,6 @@ numberButtons.forEach(button => {
         }
         //checks if you try to do multiple decimal points
         if(button.value === '.' && currentNumber.indexOf('.') > -1){
-            console.log(button.value);
-            console.log(currentNumber.indexOf('.'))
             return;
         }
         if(((+currentNumber)+"").length >= 13){
@@ -136,13 +127,11 @@ numberButtons.forEach(button => {
         equalAgain = false;
         currentNumber += button.value
         updateDisplay(currentNumber);
-        test('numberButton')
     });    
 });
 //Gives the operator their ability to juggle and calculate numbers
 operatorButtons.forEach(button =>{
     button.addEventListener('click', () => {
-        test('operatorButton')
         equalAgain = false;
         if(originalNumber === ''){
             originalNumber = currentNumber;
@@ -166,7 +155,6 @@ operatorButtons.forEach(button =>{
 });
 //The equals button ladies, gentlemen, and non-binary folks.
 equalsButton.addEventListener('click', () =>{
-    test('equal')
     if(currentNumber === '.'){currentNumber = 0};
     if(originalNumber === '.'){originalNumber = 0};
     if(equalAgain){
@@ -199,7 +187,6 @@ equalsButton.addEventListener('click', () =>{
 allButtons.forEach(button =>{
     button.addEventListener('click', () =>{
         button.classList.add('clicked');
-        console.log(button.classList);
     });
     button.addEventListener('transitionend', ()=>{
         button.classList.remove('clicked');
