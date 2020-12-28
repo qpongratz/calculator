@@ -151,6 +151,12 @@ operatorButtons.forEach(button =>{
         }else if(currentNumber === ''){
             storedOperator = button.value;
         }else{
+            if(storedOperator === ''){
+                originalNumber = currentNumber;
+                currentNumber = '';
+                storedOperator = button.value;
+                return;
+            }
             originalNumber = operate(+originalNumber, +currentNumber, storedOperator);
             updateDisplay(originalNumber);
             currentNumber = '';
