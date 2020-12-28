@@ -6,10 +6,15 @@ const equalsButton = document.getElementById('=');
 const allClearButton = document.getElementById('allClear');
 const clearEntryButton = document.getElementById('clearEntry');
 const backButton = document.getElementById('Backspace');
-let currentNumber = '';
+
+//Initialize state
+let currentNumber = '0';
 let originalNumber = '';
 let storedOperator = '';
+let lastOperator = '';
+let lastNumber = '';
 let equalAgain = false;
+updateDisplay(currentNumber)
 
 //testing function
 function test(identity){
@@ -17,6 +22,8 @@ function test(identity){
     console.log({originalNumber});
     console.log({storedOperator});
     console.log({equalAgain});
+    console.log({lastNumber});
+    console.log({lastOperator});
     console.log(identity);
 }
 
@@ -133,9 +140,6 @@ equalsButton.addEventListener('click', () =>{
         return;      
     }    
     if(currentNumber === ''){
-        if(originalNumber === ''){
-            originalNumber = currentNumber;
-        };
         updateDisplay(originalNumber);
         storedOperator = '';
         return;
@@ -162,6 +166,7 @@ window.addEventListener('keydown', function(e) {
     //looks for Enter key to press the equal button once.
     if(button === null){
         button = document.querySelector(`[data-alt='${e.key}'`)
+        if(button === null){return};
         button.focus();
         return;
     }
