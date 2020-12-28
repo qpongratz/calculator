@@ -54,7 +54,8 @@ function operate(a, b, operator){
             break;
         case '/':
             if(b === 0){
-                alert('I cannot do that.')
+                alert('I cannot do that.');
+                clearAll();
                 return 0;
             }
             return divide(a,b);
@@ -62,12 +63,10 @@ function operate(a, b, operator){
     }
 }
 function updateDisplay(currentNumber){
-    //check to display decimal if it is the last character on display
-    if(currentNumber[currentNumber.length -1] === '.'){
-        display.textContent = +currentNumber.slice(0, (currentNumber.length - 1)) + '.';
-        return;
+    if(+currentNumber){
+        display.textContent = +currentNumber;
     }
-    display.textContent = (+currentNumber);
+    display.textContent = currentNumber;
 }
 //Give clear and back their events.
 function clearAll() {
