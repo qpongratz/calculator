@@ -61,6 +61,11 @@ function operate(a, b, operator){
     }
 }
 function updateDisplay(currentNumber){
+    //check to display decimal if it is the last character on display
+    if(currentNumber[currentNumber.length -1] === '.'){
+        display.textContent = +currentNumber.slice(0, (currentNumber.length - 1)) + '.';
+        return;
+    }
     display.textContent = +currentNumber;
 }
 //Give clear and back their events.
@@ -129,11 +134,13 @@ operatorButtons.forEach(button =>{
             currentNumber = '';
             storedOperator = button.value;
         }
-    })
-})
+    });
+});
 //The equals button ladies, gentlemen, and non-binary folks.
 equalsButton.addEventListener('click', () =>{
     test('equal')
+    if(currentNumber === '.'){currentNumber = 0};
+    if(originalNumber === '.'){originalNumber = 0};
     if(equalAgain){
         originalNumber = operate(+originalNumber, +lastNumber, lastOperator);
         updateDisplay(originalNumber);  
@@ -148,7 +155,6 @@ equalsButton.addEventListener('click', () =>{
         originalNumber = currentNumber;
         updateDisplay(originalNumber);
         currentNumber = '';
-        //storedOperator = '';
         return;
     };
     originalNumber = operate(+originalNumber, +currentNumber, storedOperator);
@@ -172,4 +178,4 @@ window.addEventListener('keydown', function(e) {
     }
     button.focus();
     button.click();
-})
+});
