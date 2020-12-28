@@ -60,7 +60,11 @@ button{
     padding: 10px;
 }
 .button:hover{
-    transform: scale(.99);
+    transform: scale(.98);
     transition-duration: .05s;
+}
+.clicked{
+    transform: scale(.97);
+    transition-duration: .07s;
 }
 

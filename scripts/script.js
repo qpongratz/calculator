@@ -6,6 +6,7 @@ const equalsButton = document.getElementById('=');
 const allClearButton = document.getElementById('allClear');
 const clearEntryButton = document.getElementById('clearEntry');
 const backButton = document.getElementById('Backspace');
+const allButtons = document.querySelectorAll('button');
 
 //Initialize state
 let currentNumber = '0';
@@ -66,7 +67,7 @@ function updateDisplay(currentNumber){
         display.textContent = +currentNumber.slice(0, (currentNumber.length - 1)) + '.';
         return;
     }
-    display.textContent = +currentNumber;
+    display.textContent = (+currentNumber);
 }
 //Give clear and back their events.
 function clearAll() {
@@ -164,7 +165,16 @@ equalsButton.addEventListener('click', () =>{
     equalAgain = true;
     currentNumber = '';
 });
-
+//button animation on click
+allButtons.forEach(button =>{
+    button.addEventListener('click', () =>{
+        button.classList.add('clicked');
+        console.log(button.classList);
+    });
+    button.addEventListener('transitionend', ()=>{
+        button.classList.remove('clicked');
+    });
+});
 
 //keyboard support
 window.addEventListener('keydown', function(e) {
