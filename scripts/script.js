@@ -54,7 +54,7 @@ function operate(a, b, operator){
             break;
         case '/':
             if(b === 0){
-                alert('I cannot do that.');
+                alert('I cannot do that, Dave.');
                 clearAll();
                 return 0;
             }
@@ -63,10 +63,20 @@ function operate(a, b, operator){
     }
 }
 function updateDisplay(currentNumber){
-    if(+currentNumber){
-        display.textContent = +currentNumber;
+    currentNumber = currentNumber +''
+    let decimalSpot = currentNumber.indexOf('.')
+    if(decimalSpot>-1){
+        let leftDecimal = currentNumber.substring(0, decimalSpot);
+        let rightDecimal = currentNumber.substring(decimalSpot); 
+        currentNumber = +leftDecimal + rightDecimal;
+        display.textContent = currentNumber;
+        return
     }
-    display.textContent = currentNumber;
+    if(isNaN(+currentNumber)){
+        display.textContent = currentNumber;
+        return;
+    }
+    display.textContent = +currentNumber;
 }
 //Give clear and back their events.
 function clearAll() {
@@ -109,6 +119,9 @@ numberButtons.forEach(button => {
         if(button.value === '.' && currentNumber.indexOf('.') > -1){
             console.log(button.value);
             console.log(currentNumber.indexOf('.'))
+            return;
+        }
+        if(((+currentNumber)+"").length > 12){
             return;
         }
         equalAgain = false;
