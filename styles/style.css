@@ -18,6 +18,7 @@ html, body{
     padding: 4%;
     border-radius: 5%;
     position: relative;
+    box-shadow: 2px 2px black;
 }
 .calcBottom{
     margin: auto;
@@ -39,7 +40,9 @@ button{
     border-radius: inherit;
     height: 100%;
     width: 100%;
-    background-color: var(--gray);
+    background-color: var(--lightblue);
+    border: 1px;
+    box-shadow:2px 2px black;
 }
 .operator, .editor, .special{
     background-color: var(--red);
@@ -55,9 +58,14 @@ button{
     border-radius: 15px;
     width: 92%;
     height: fit-content;
-    background-color: var(--lightblue);
+    background-color: var(--gray);
     margin: auto;
     padding: 10px;
+    box-shadow: 1px 1px black inset;
+}
+button:focus{
+    outline: none;
+    border: 2px solid red;
 }
 .button:hover{
     transform: scale(.98);
