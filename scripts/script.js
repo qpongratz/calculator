@@ -62,8 +62,17 @@ function operate(a, b, operator){
             break;
     }
 }
+let number = 9.147049018269502e+103+''
+console.log(number.length)
 function updateDisplay(currentNumber){
+    //Some messy code to git rid of leading zeros but also displaying numbers after a decimal correctly
     currentNumber = currentNumber +''
+    let length = currentNumber.length;
+    console.log(length)
+    console.log(typeof(length))
+    if(length > 14){
+        currentNumber = (+currentNumber).toExponential(7);
+    }
     let decimalSpot = currentNumber.indexOf('.')
     if(decimalSpot>-1){
         let leftDecimal = currentNumber.substring(0, decimalSpot);
@@ -121,7 +130,7 @@ numberButtons.forEach(button => {
             console.log(currentNumber.indexOf('.'))
             return;
         }
-        if(((+currentNumber)+"").length > 12){
+        if(((+currentNumber)+"").length >= 13){
             return;
         }
         equalAgain = false;
@@ -170,6 +179,9 @@ equalsButton.addEventListener('click', () =>{
         currentNumber = '';
         return;
     };
+    if(storedOperator === ''){
+        return;
+    }
     originalNumber = operate(+originalNumber, +currentNumber, storedOperator);
     updateDisplay(originalNumber);
     lastNumber = currentNumber;

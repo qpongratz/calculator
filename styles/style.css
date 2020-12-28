@@ -9,7 +9,7 @@ html, body{
     background-color: var(--white);
 }
 .calculator{
-    width: 400px;
+    width: 300px;
     height: 400px;
     max-width: 90vw;
     max-height: 100vh;
