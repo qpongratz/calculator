@@ -15,7 +15,7 @@ html, body{
     max-height: 100vh;
     margin: auto;
     background-color: var(--blue);
-    padding: 4%;
+    padding: 2%;
     border-radius: 5%;
     position: relative;
     box-shadow: 2px 2px black;
@@ -33,10 +33,12 @@ html, body{
 div.button{
     height: 100%;
     width: 100%;
+    max-width: auto;
+    max-height: auto;
     border-radius: 15px;
 }
 button{
-    font-size: x-large;
+    font-size: 1.5rem;
     border-radius: inherit;
     height: 100%;
     width: 100%;
